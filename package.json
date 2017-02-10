@@ -1,6 +1,7 @@
 {
-  "name": "basic-redux",
+  "name": "react-redux-list-app",
   "version": "0.1.0",
+  "author": "John Whiteside",
   "private": true,
   "devDependencies": {
     "react-scripts": "0.8.5"
@@ -9,7 +10,6 @@
     "material-ui": "^0.16.7",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-materialize": "^0.18.1",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0"
