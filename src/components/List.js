@@ -14,11 +14,17 @@ const List = ({ items, remove, complete, setActive }) => {
         <strike>{item.title}</strike>
       );
     }
+
+    const handleDeleteClick = (e) => {
+      e.stopPropagation();
+      remove(item.id)
+    }
+
     return (
       <ListItem
         onClick={() => item.isCompleted ? setActive(item.id) : complete(item.id)}
         key={`item-${index}`}
-        rightIcon={<FontIcon onClick={() => remove(item.id)} className="fa fa-times"/>}>
+        rightIcon={<FontIcon onClick={handleDeleteClick} className="fa fa-times"/>}>
         {$title}
       </ListItem>
     );
