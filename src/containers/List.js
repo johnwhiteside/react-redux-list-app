@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addToList, removeFromList, completeItem, setItemActive, updateInputText } from '../actions';
+import { addToList, removeFromList, completeItem, setItemActive } from '../actions';
 import List from '../components/List';
 import AddItemForm from '../components/AddItemForm';
 import Divider from 'material-ui/Divider';
@@ -24,7 +24,7 @@ class ListContainer extends React.Component {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = (state) => ({
   items: state.list

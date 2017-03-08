@@ -1,5 +1,3 @@
-//reducer
-
 let lastId = 0;
 
 const list = (state = [], action) => {
@@ -18,7 +16,7 @@ const list = (state = [], action) => {
       return [...state].filter(item => item.id !== action.itemId);
 
     case 'SET_ITEM_ACTIVE':
-      return [...state].map((item, index) => {
+      return [...state].map(item => {
         if (item.id === action.itemId) {
           return setActive(item);
         }
@@ -26,11 +24,11 @@ const list = (state = [], action) => {
       });
 
     case 'COMPLETE_ITEM':
-      return [...state].map((item, index) => {
+      return [...state].map(item => {
         if (item.id === action.itemId) {
           return completeItem(item);
         }
-        return { ...item };
+        return {...item};
       });
     default:
       return state;
