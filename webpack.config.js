@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -13,6 +15,12 @@ module.exports = {
         include : __dirname,
         loaders : [ "babel-loader", "eslint-loader" ]
       }
+    ]
+  },
+  resolve: {
+    modules: [
+      path.resolve('node_modules'),
+      path.resolve('./src')
     ]
   }
 };

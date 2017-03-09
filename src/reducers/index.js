@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import list from './list';
+import list from 'reducers/list';
 
 const todoApp = combineReducers({
   list
