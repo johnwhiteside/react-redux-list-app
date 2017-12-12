@@ -10,6 +10,7 @@ module.exports = {
   "rules": {
     "no-case-declarations": "off",
     "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error"
+    "react/jsx-uses-vars": "error",
+    "no-debugger": "off",
   }
 };

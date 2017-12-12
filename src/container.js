@@ -1,13 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addToList, removeFromList, completeItem, setItemActive } from 'actions';
+import {
+  addToList,
+  removeFromList,
+  completeItem,
+  setItemActive
+} from 'module/actions';
 import List from 'components/List';
 import AddItemForm from 'components/AddItemForm';
 import Divider from 'material-ui/Divider';
-import { getActiveItems } from 'selectors';
+import { getActiveItems } from 'module/selectors';
 
-const mapStateToProps = (state) => ({
-  items: getActiveItems(state)
+const mapStateToProps = state => ({
+  items: getActiveItems(state),
 })
 
 const dispatchToProps = (dispatch) => ({
@@ -36,6 +41,7 @@ export default class ListContainer extends React.Component {
       complete,
       setActive
     };
+    
     return (
       <div>
         <AddItemForm add={add} />
