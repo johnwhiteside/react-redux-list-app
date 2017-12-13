@@ -1,46 +1,72 @@
 import React from 'react';
-import { ListItem } from 'material-ui/List';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import FontIcon from 'material-ui/FontIcon';
+import ListItem from 'components/ListItem';
+import { getActiveItems } from 'module/selectors';
+import {
+  removeFromList,
+  completeItem,
+  setItemActive
+} from 'module/actions';
 
-const List = ({ items, remove, complete, setActive }) => {
+const mapStateToProps = state => ({
+  items: getActiveItems(state),
+});
 
-  const renderListItem = (item, index) => {
-    let $title = item.title;
-    if (item.isCompleted) {
-      $title = (
-        <strike>{item.title}</strike>
-      );
-    }
+const dispatchToProps = (dispatch) => ({
+  remove(index){
+    dispatch(removeFromList(index));
+  },
+  complete(index){
+    dispatch(completeItem(index));
+  },
+  setActive(index){
+    dispatch(setItemActive(index));
+  }
+});
 
-    const handleDeleteClick = (e) => {
-      e.stopPropagation();
-      remove(item.id)
-    }
+class List extends React.PureComponent {
 
-    return (
-      <ListItem
-        onClick={() => item.isCompleted ? setActive(item.id) : complete(item.id)}
-        key={`item-${index}`}
-        rightIcon={<FontIcon onClick={handleDeleteClick} className="fa fa-times"/>}>
-        {$title}
-      </ListItem>
-    );
+  handleDeleteClick(item){
+    const { remove} = this.props;
+    remove(item.id)
   }
 
-  const renderList = () => {
+  handleItemClick(item){
+    const { setActive, complete } = this.props;
+    item.isCompleted ? setActive(item.id) : complete(item.id);
+  }
+
+  renderList(){
+    const { items } = this.props;
     let $list = [];
     items.map((item, index) => {
-      $list = [...$list, renderListItem(item, index)];
+      $list = [...$list, <ListItem onClick={this.handleItemClick} key={`item-${index}`} item={item} />];
     });
     return $list;
   }
 
-  return (
-    <Paper>
-      {renderList()}
-    </Paper>
-  );
+  render(){
+    return (
+      <Paper>
+        {this.renderList()}
+      </Paper>
+    );
+  }
+}
+
+List.propTypes = {
+  items: PropTypes.array.isRequired,
+  remove: PropTypes.func,
+  complete: PropTypes.func,
+  setActive: PropTypes.func,
 };
 
-export default List;
+List.defaultProps = {
+  remove: () => {},
+  complete: () => {},
+  setActive: () => {},
+};
+
+export default connect(mapStateToProps, dispatchToProps)(List);
