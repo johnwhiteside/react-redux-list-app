@@ -7,7 +7,14 @@
   "repository": "https://github.com/johnwhiteside/react-redux-list-app.git",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --progress --inline --hot"
+    "start": "webpack-dev-server --progress --inline --hot",
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "modulePaths": [
+      "src"
+    ]
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
@@ -26,6 +33,8 @@
   },
   "dependencies": {
     "immutable": "^3.8.2",
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
     "react": "^15.5",

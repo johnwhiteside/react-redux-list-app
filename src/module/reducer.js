@@ -1,11 +1,11 @@
 import { Map, Record } from 'immutable';
 
 import {
-  ADD_TO_LIST,
-  COMPLETE_ITEM,
-  REMOVE_FROM_LIST,
-  SET_ITEM_ACTIVE,
-} from './constants';
+  ADD_TODO,
+  COMPLETE_TODO,
+  DELETE_TODO,
+  SET_TODO_TO_ACTIVE,
+} from 'module/constants';
 
 let lastId = 0;
 
@@ -15,23 +15,29 @@ const ToDo = Record({
   isCompleted: false,
 });
 
-const list = (state = Map([]), action) => {
+const initialState = Map([]);
+
+const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TO_LIST:
-      const todo = new ToDo({ id: lastId++, title: action.title });
+    case ADD_TODO:
+      const todo = new ToDo({ id: lastId++, title: action.payload.title });
       return state.set(todo.id, todo);
 
-    case REMOVE_FROM_LIST:
-      return state.delete(action.itemId);
+    case DELETE_TODO:
+      return state.delete(action.payload.itemId);
 
-    case SET_ITEM_ACTIVE:
-      return state.update(action.itemId, todo => todo.set('isCompleted', false));
+    case SET_TODO_TO_ACTIVE:
+      return state.update(action.payload.itemId, todo => todo.set('isCompleted', false));
 
-    case COMPLETE_ITEM:
-      return state.update(action.itemId, todo => todo.set('isCompleted', true));
+    case COMPLETE_TODO:
+      return state.update(action.payload.itemId, todo => todo.set('isCompleted', true));
 
     default: return state;
   }
 }
 
-export default list;
+export default reducer;
+export {
+  initialState,
+  ToDo,
+}

@@ -1,33 +1,41 @@
 import {
-  ADD_TO_LIST,
-  COMPLETE_ITEM,
-  REMOVE_FROM_LIST,
-  SET_ITEM_ACTIVE,
-} from './constants';
+  ADD_TODO,
+  COMPLETE_TODO,
+  DELETE_TODO,
+  SET_TODO_TO_ACTIVE,
+} from 'module/constants';
 
-const addToList = title => ({
-  type: ADD_TO_LIST,
-  title
+const addToDo = title => ({
+  type: ADD_TODO,
+  payload: {
+    title,
+  }
 });
 
-const completeItem = itemId => ({
-  type: COMPLETE_ITEM,
-  itemId
+const completeToDo = itemId => ({
+  type: COMPLETE_TODO,
+  payload: {
+    itemId,
+  }
 });
 
-const removeFromList = itemId => ({
-  type: REMOVE_FROM_LIST,
-  itemId
+const deleteToDo = itemId => ({
+  type: DELETE_TODO,
+  payload: {
+    itemId,
+  }
 });
 
-const setItemActive = itemId => ({
-  type: SET_ITEM_ACTIVE,
-  itemId
+const setToDoToActive = itemId => ({
+  type: SET_TODO_TO_ACTIVE,
+  payload: {
+    itemId,
+  }
 });
 
 export {
-  addToList,
-  completeItem,
-  removeFromList,
-  setItemActive,
+  addToDo,
+  completeToDo,
+  deleteToDo,
+  setToDoToActive,
 };

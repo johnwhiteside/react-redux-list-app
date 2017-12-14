@@ -6,9 +6,9 @@ import ListItem from 'components/ListItem';
 import { getActiveItems } from 'module/selectors';
 
 import {
-  removeFromList,
-  completeItem,
-  setItemActive
+  deleteToDo,
+  completeToDo,
+  setToDoToActive
 } from 'module/actions';
 
 const mapStateToProps = state => ({
@@ -16,9 +16,9 @@ const mapStateToProps = state => ({
 });
 
 const dispatchToProps = dispatch => ({
-  remove: (id) => dispatch(removeFromList(id)),
-  complete: (id) => dispatch(completeItem(id)),
-  setActive: (id) => dispatch(setItemActive(id)),
+  remove: (id) => dispatch(deleteToDo(id)),
+  complete: (id) => dispatch(completeToDo(id)),
+  setActive: (id) => dispatch(setToDoToActive(id)),
 });
 
 class List extends React.PureComponent {

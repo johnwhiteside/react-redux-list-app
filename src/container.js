@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addToList } from 'module/actions';
+import { addToDo } from 'module/actions';
 import List from 'components/List';
 import AddItemForm from 'components/AddItemForm';
 import Divider from 'material-ui/Divider';
 
 const dispatchToProps = (dispatch) => ({
   add(item){
-    dispatch(addToList(item));
+    dispatch(addToDo(item));
   },
 });
 
