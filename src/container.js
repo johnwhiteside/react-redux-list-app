@@ -4,11 +4,6 @@ import { addToList } from 'module/actions';
 import List from 'components/List';
 import AddItemForm from 'components/AddItemForm';
 import Divider from 'material-ui/Divider';
-import { getActiveItems } from 'module/selectors';
-
-const mapStateToProps = state => ({
-  items: getActiveItems(state),
-});
 
 const dispatchToProps = (dispatch) => ({
   add(item){
@@ -16,7 +11,7 @@ const dispatchToProps = (dispatch) => ({
   },
 });
 
-@connect(mapStateToProps, dispatchToProps)
+@connect(null, dispatchToProps)
 export default class ListContainer extends React.Component {
 
   render(){
