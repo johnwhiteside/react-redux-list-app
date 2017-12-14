@@ -13,28 +13,22 @@ class Item extends React.Component {
 
   handleClick(e){
     e.stopPropagation();
-    this.props.handleDeleteClick(this.props.item);
+    this.props.onClick(this.props.item);
   }
 
   handleDeleteClick(e){
     e.stopPropagation();
-    this.props.onClick(this.props.item);
+    this.props.handleDeleteClick(this.props.item);
   }
 
   render(){
     const { item } = this.props;
-    let $title = item.title;
-    if (item.isCompleted) {
-      $title = (
-        <strike>{item.title}</strike>
-      );
-    }
 
     return (
       <ListItem
         onClick={this.handleClick}
         rightIcon={<FontIcon onClick={this.handleDeleteClick} className="fa fa-times"/>}>
-        {$title}
+        {item.isCompleted ? <strike>{item.title}</strike> : item.title}
       </ListItem>
     );
   }

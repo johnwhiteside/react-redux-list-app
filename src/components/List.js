@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import ListItem from 'components/ListItem';
 import { getActiveItems } from 'module/selectors';
+
 import {
   removeFromList,
   completeItem,
@@ -14,37 +15,37 @@ const mapStateToProps = state => ({
   items: getActiveItems(state),
 });
 
-const dispatchToProps = (dispatch) => ({
-  remove(index){
-    dispatch(removeFromList(index));
-  },
-  complete(index){
-    dispatch(completeItem(index));
-  },
-  setActive(index){
-    dispatch(setItemActive(index));
-  }
+const dispatchToProps = dispatch => ({
+  remove: (id) => dispatch(removeFromList(id)),
+  complete: (id) => dispatch(completeItem(id)),
+  setActive: (id) => dispatch(setItemActive(id)),
 });
 
 class List extends React.PureComponent {
 
-  handleDeleteClick(item){
-    const { remove} = this.props;
-    remove(item.id)
+  constructor(props) {
+    super(props);
+    this.handleItemClick = this.handleItemClick.bind(this);
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
   }
 
-  handleItemClick(item){
+  handleDeleteClick({ id }){
+    const { remove} = this.props;
+    remove(id);
+  }
+
+  handleItemClick({ isCompleted, id }){
     const { setActive, complete } = this.props;
-    item.isCompleted ? setActive(item.id) : complete(item.id);
+    isCompleted ? setActive(id) : complete(id);
   }
 
   renderList(){
     const { items } = this.props;
-    let $list = [];
-    items.map((item, index) => {
-      $list = [...$list, <ListItem onClick={this.handleItemClick} key={`item-${index}`} item={item} />];
-    });
-    return $list;
+    const listItemProps = {
+      handleDeleteClick: this.handleDeleteClick,
+      onClick: this.handleItemClick,
+    };
+    return items.map((item, index) => <ListItem {...listItemProps} key={`item-${index}`} item={item} />);
   }
 
   render(){
